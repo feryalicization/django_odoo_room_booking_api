@@ -10,7 +10,14 @@ class BaseModels(models.Model):
     updated_at = models.DateTimeField(blank=True, null=True)
     deleted_at = models.DateTimeField(blank=True, null=True)
     created_by = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True)
+        User, on_delete=models.SET_NULL, null=True, related_name='%(class)s_created_by'
+    )
+    updated_by = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name='%(class)s_updated_by'
+    )
+    deleted_by = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, related_name='%(class)s_deleted_by'
+    )
 
     class Meta:
         abstract = True
